@@ -20,11 +20,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.toDo = [[ToDoS alloc] init];
-    self.toDo.titelArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"titleArray"];
+    self.toDo.titelArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"titleArray"]mutableCopy];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    self.toDo.titelArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"titleArray"];
+    self.toDo.titelArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"titleArray"]mutableCopy];
     [self.tableView reloadData];
 }
 
@@ -53,9 +53,10 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        self.toDo.titelArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"titleArray"]mutableCopy];
         [self.toDo deleteIteam:indexPath.row];
-        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self loadView];
     }
 }
 

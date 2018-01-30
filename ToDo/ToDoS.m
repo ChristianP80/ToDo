@@ -26,11 +26,13 @@
 }
 
 -(void)deleteIteam:(NSInteger*)index{
-    self.titelArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"titleArray"];
-    [self.titelArray removeObjectAtIndex:index];
+    self.titelArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"titleArray"]mutableCopy];
+    [self.titelArray removeObjectAtIndex:(int)index];
+    [[NSUserDefaults standardUserDefaults] setObject:self.titelArray forKey:@"titleArray"];
 }
 
 -(NSInteger)getArrayLength {
+    //self.titelArray =[[[NSUserDefaults standardUserDefaults] objectForKey:@"titelArray"]mutableCopy];
     return self.titelArray.count;
 }
 
