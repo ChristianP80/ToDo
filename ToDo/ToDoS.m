@@ -25,8 +25,9 @@
     [[NSUserDefaults standardUserDefaults] setObject:self.titelArray forKey:@"titleArray"];
 }
 
--(void)deletIteam:(NSString*)titel{
-    [self.titelArray removeObject:titel];
+-(void)deleteIteam:(NSInteger*)index{
+    self.titelArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"titleArray"];
+    [self.titelArray removeObjectAtIndex:index];
 }
 
 -(NSInteger)getArrayLength {

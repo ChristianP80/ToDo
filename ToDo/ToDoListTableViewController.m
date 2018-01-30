@@ -24,6 +24,7 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    self.toDo.titelArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"titleArray"];
     [self.tableView reloadData];
 }
 
@@ -48,6 +49,14 @@
     cell.textLabel.text = self.toDo.titelArray[indexPath.row];
 
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [self.toDo deleteIteam:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
 }
 
 #pragma mark - Navigation
