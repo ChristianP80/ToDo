@@ -14,4 +14,5 @@
 
 -(void)addItem:(NSString*)titel;
 -(void)deletIteam:(NSString*)titel;
+-(NSInteger)getArrayLength;
 @end

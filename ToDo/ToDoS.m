@@ -22,10 +22,15 @@
 
 -(void)addItem:(NSString*)titel{
     [self.titelArray addObject:titel];
+    [[NSUserDefaults standardUserDefaults] setObject:self.titelArray forKey:@"titleArray"];
 }
 
 -(void)deletIteam:(NSString*)titel{
     [self.titelArray removeObject:titel];
+}
+
+-(NSInteger)getArrayLength {
+    return self.titelArray.count;
 }
 
 @end

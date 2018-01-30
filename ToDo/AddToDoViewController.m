@@ -7,34 +7,27 @@
 //
 
 #import "AddToDoViewController.h"
+#import "ToDoS.h"
 
 
 @interface AddToDoViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *toDoTitel;
 @property (weak, nonatomic) IBOutlet UITextField *toDoDescription;
-
+@property (nonatomic) ToDoS *toDo;
 @end
 
 @implementation AddToDoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.titleTodoList = @[].mutableCopy;
-    // Do any additional setup after loading the view.
+    self.toDo = [[ToDoS alloc] init];
 }
 
 - (IBAction)addItem:(id)sender {
-    //
-    //[self.toDoTitel.text isEqualToString:self.titleTodoList[self.titleTodoList.count-1]]
-    if ([self.toDoTitel.text isEqualToString:@""]){
-        [self.navigationController popViewControllerAnimated:YES];
-
-    } else {
-        [self.titleTodoList addObject:self.toDoTitel.text];
-        //   [self.descriptionToDoList addObject:self.toDoDescription.text];
-        [[NSUserDefaults standardUserDefaults] setObject:self.titleTodoList forKey:@"titleToDoListArray"];
-        [self.navigationController popViewControllerAnimated:YES];
-    }
+    self.toDo.titelArray =[[[NSUserDefaults standardUserDefaults] objectForKey:@"titleArray"]mutableCopy];
+    [self.toDo.titelArray addObject:self.toDoTitel.text];
+    [[NSUserDefaults standardUserDefaults] setObject:self.toDo.titelArray forKey:@"titleArray"];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {

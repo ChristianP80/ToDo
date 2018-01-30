@@ -12,26 +12,23 @@
 
 @interface ToDoListTableViewController ()
 @property (nonatomic) ToDoS *toDo;
-@property (nonatomic) NSMutableArray *tempArray;
+//@property (nonatomic) NSMutableArray *tempArray;
 @end
 
 @implementation ToDoListTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     self.toDo = [[ToDoS alloc] init];
+    self.toDo.titelArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"titleArray"];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    self.tempArray = [[NSUserDefaults standardUserDefaults] objectForKey:@"titleToDoListArray"];
-    [self.toDo.titelArray addObject: self.tempArray[self.tempArray.count-1]];
     [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
@@ -41,7 +38,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.toDo.titelArray.count;
+    return [self.toDo getArrayLength];
 }
 
 
@@ -55,7 +52,6 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 
     if ([segue.identifier isEqualToString:@"AddTask"]) {
