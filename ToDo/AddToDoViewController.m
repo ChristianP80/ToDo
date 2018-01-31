@@ -24,7 +24,7 @@
 }
 
 - (IBAction)addItem:(id)sender {
-    [self.toDo addItem:self.toDoTitel.text];
+    [self.toDo addItem:self.toDoTitel.text: self.toDoDescription.text];
     [[NSUserDefaults standardUserDefaults] setObject:self.toDo.titelArray forKey:@"titleArray"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.navigationController popViewControllerAnimated:YES];

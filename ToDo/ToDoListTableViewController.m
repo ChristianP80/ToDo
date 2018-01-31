@@ -20,8 +20,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.toDo = [[ToDoS alloc] init];
-    //self.toDo.titelArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"titleArray"]mutableCopy];
-    NSLog(@"%@", self.toDo.titelArray);
 }
 
 
