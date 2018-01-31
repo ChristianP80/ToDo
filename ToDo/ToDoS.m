@@ -14,8 +14,10 @@
 {
     self = [super init];
     if (self) {
-        self.titelArray = [[NSMutableArray alloc] init];
-        self.titelArray = @[].mutableCopy;
+        self.titelArray = [[[NSUserDefaults standardUserDefaults]objectForKey:@"titleArray"]mutableCopy];
+        if(self.titelArray == nil) {
+            self.titelArray = [[NSMutableArray alloc] init];
+        }
     }
     return self;
 }
@@ -23,12 +25,15 @@
 -(void)addItem:(NSString*)titel{
     [self.titelArray addObject:titel];
     [[NSUserDefaults standardUserDefaults] setObject:self.titelArray forKey:@"titleArray"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSLog(@"%@", self.titelArray);
 }
 
--(void)deleteIteam:(NSInteger*)index{
-    self.titelArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"titleArray"]mutableCopy];
+-(void)deleteIteam:(NSInteger)index{
     [self.titelArray removeObjectAtIndex:(int)index];
     [[NSUserDefaults standardUserDefaults] setObject:self.titelArray forKey:@"titleArray"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
 }
 
 -(NSInteger)getArrayLength {

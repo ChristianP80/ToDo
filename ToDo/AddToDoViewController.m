@@ -24,25 +24,15 @@
 }
 
 - (IBAction)addItem:(id)sender {
-    self.toDo.titelArray =[[[NSUserDefaults standardUserDefaults] objectForKey:@"titleArray"]mutableCopy];
-    [self.toDo.titelArray addObject:self.toDoTitel.text];
+    [self.toDo addItem:self.toDoTitel.text];
+    NSLog(@"value %@", self.toDo.titelArray);
     [[NSUserDefaults standardUserDefaults] setObject:self.toDo.titelArray forKey:@"titleArray"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

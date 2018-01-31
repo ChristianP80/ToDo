@@ -20,8 +20,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.toDo = [[ToDoS alloc] init];
-    self.toDo.titelArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"titleArray"]mutableCopy];
+    //self.toDo.titelArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"titleArray"]mutableCopy];
+    NSLog(@"%@", self.toDo.titelArray);
 }
+
 
 -(void)viewWillAppear:(BOOL)animated {
     self.toDo.titelArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"titleArray"]mutableCopy];
@@ -67,6 +69,7 @@
     if ([segue.identifier isEqualToString:@"AddTask"]) {
         AddToDoViewController *add = [segue destinationViewController];
         add.title = [NSString stringWithFormat:(@"test")];
+        
     }
     
 }
