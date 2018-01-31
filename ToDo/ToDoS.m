@@ -26,7 +26,6 @@
     [self.titelArray addObject:titel];
     [[NSUserDefaults standardUserDefaults] setObject:self.titelArray forKey:@"titleArray"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    NSLog(@"%@", self.titelArray);
 }
 
 -(void)deleteIteam:(NSInteger)index{

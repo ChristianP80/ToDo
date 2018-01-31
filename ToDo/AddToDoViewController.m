@@ -12,7 +12,7 @@
 
 @interface AddToDoViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *toDoTitel;
-@property (weak, nonatomic) IBOutlet UITextField *toDoDescription;
+@property (weak, nonatomic) IBOutlet UITextView *toDoDescription;
 @property (nonatomic) ToDoS *toDo;
 @end
 
@@ -25,7 +25,6 @@
 
 - (IBAction)addItem:(id)sender {
     [self.toDo addItem:self.toDoTitel.text];
-    NSLog(@"value %@", self.toDo.titelArray);
     [[NSUserDefaults standardUserDefaults] setObject:self.toDo.titelArray forKey:@"titleArray"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self.navigationController popViewControllerAnimated:YES];

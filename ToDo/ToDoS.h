@@ -10,7 +10,7 @@
 
 @interface ToDoS : NSObject
 @property (nonatomic) NSMutableArray *titelArray;
-//@property (nonatomic) NSMutableArray *descriptionArray;
+@property (nonatomic) NSMutableArray *descriptionArray;
 
 -(void)addItem:(NSString*)titel;
 -(void)deleteIteam:(NSInteger)titel;
