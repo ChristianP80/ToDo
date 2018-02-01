@@ -13,6 +13,6 @@
 @property (nonatomic) NSMutableArray *descriptionArray;
 
 -(void)addItem:(NSString*)titel :(NSString*)description;
--(void)deleteIteam:(NSInteger)titel;
+-(void)deleteIteam:(NSInteger)index;
 -(NSInteger)getArrayLength;
 @end

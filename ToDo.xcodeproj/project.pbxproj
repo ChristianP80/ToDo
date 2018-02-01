@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D4181D220226112002140FF /* ShowDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4181D120226112002140FF /* ShowDetailsViewController.m */; };
 		3D503384201D159600DE12E6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D503383201D159600DE12E6 /* AppDelegate.m */; };
 		3D50338A201D159600DE12E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3D503388201D159600DE12E6 /* Main.storyboard */; };
 		3D50338C201D159600DE12E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3D50338B201D159600DE12E6 /* Assets.xcassets */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D4181D020226112002140FF /* ShowDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowDetailsViewController.h; sourceTree = "<group>"; };
+		3D4181D120226112002140FF /* ShowDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowDetailsViewController.m; sourceTree = "<group>"; };
 		3D50337F201D159600DE12E6 /* ToDo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D503382201D159600DE12E6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3D503383201D159600DE12E6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -77,6 +80,8 @@
 				3D503391201D159600DE12E6 /* main.m */,
 				3D503398201DF8E300DE12E6 /* ToDoListTableViewController.h */,
 				3D503399201DF8E300DE12E6 /* ToDoListTableViewController.m */,
+				3D4181D020226112002140FF /* ShowDetailsViewController.h */,
+				3D4181D120226112002140FF /* ShowDetailsViewController.m */,
 			);
 			path = ToDo;
 			sourceTree = "<group>";
@@ -156,6 +161,7 @@
 				3D503392201D159600DE12E6 /* main.m in Sources */,
 				3D503384201D159600DE12E6 /* AppDelegate.m in Sources */,
 				3D50339D201E62FA00DE12E6 /* ToDoS.m in Sources */,
+				3D4181D220226112002140FF /* ShowDetailsViewController.m in Sources */,
 				3D5033A0201E690400DE12E6 /* AddToDoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

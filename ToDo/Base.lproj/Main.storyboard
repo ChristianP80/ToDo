@@ -26,6 +26,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="2EK-JH-oMk" kind="show" identifier="showDetails" id="SEi-3O-OGV"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -44,6 +47,33 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6EO-it-CGb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="948" y="63"/>
+        </scene>
+        <!--Show Details View Controller-->
+        <scene sceneID="3TK-aa-VSA">
+            <objects>
+                <viewController id="2EK-JH-oMk" customClass="ShowDetailsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fGC-S6-8Oa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ae2-LV-3io">
+                                <rect key="frame" x="67" y="152" width="240" height="413"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.81462216379999997" green="0.82050514220000004" blue="0.83649075029999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="5eI-Zc-MNP"/>
+                    </view>
+                    <connections>
+                        <outlet property="showToDoDetail" destination="Ae2-LV-3io" id="BSh-ze-clb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jtE-ku-Vuf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1853.5999999999999" y="452.92353823088462"/>
         </scene>
         <!--Add To Do View Controller-->
         <scene sceneID="OTc-w0-fly">
@@ -87,7 +117,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ITV-j8-DsO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1804" y="62.518740629685162"/>
+            <point key="canvasLocation" x="1855" y="-283"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="b9P-lz-ARA">

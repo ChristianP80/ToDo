@@ -9,10 +9,10 @@
 #import "ToDoListTableViewController.h"
 #import "AddToDoViewController.h"
 #import "ToDoS.h"
+#import "ShowDetailsViewController.h"
 
 @interface ToDoListTableViewController ()
 @property (nonatomic) ToDoS *toDo;
-//@property (nonatomic) NSMutableArray *tempArray;
 @end
 
 @implementation ToDoListTableViewController
@@ -25,6 +25,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     self.toDo.titelArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"titleArray"]mutableCopy];
+    self.toDo.descriptionArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"descriptionArray"]mutableCopy];
     [self.tableView reloadData];
 }
 
@@ -62,14 +63,19 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-
-    if ([segue.identifier isEqualToString:@"AddTask"]) {
-        AddToDoViewController *add = [segue destinationViewController];
-        add.title = [NSString stringWithFormat:(@"test")];
-        
-    }
     
-}
 
+    if ([segue.identifier isEqualToString:@"showDetails"]) {
+        UITableViewCell *cell = sender;
+        ShowDetailsViewController *detail = [segue destinationViewController];
+        detail.title = cell.textLabel.text;
+        int index = (int)[self.tableView indexPathForCell:cell].row;
+        detail.showDetailsArray = self.toDo.descriptionArray;
+        detail.detailIndex = index;
+    } else if ([segue.identifier isEqualToString:@"addTask"]) {
+        AddToDoViewController *add = [segue destinationViewController];
+        add.title = [NSString stringWithFormat:(@"Add your ToDo")];
+    }
+}
 
 @end

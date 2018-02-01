@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AddToDoViewController : UIViewController
-//@property (nonatomic) NSMutableArray *titleTodoList;
-//@property (nonatomic) NSMutableArray *descriptionToDoList;
+
 @end
