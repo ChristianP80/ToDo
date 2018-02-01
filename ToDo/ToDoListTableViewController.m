@@ -69,11 +69,23 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     
-    return 1;
+    if(section == 0){
+        return @"ToDo´s";
+    }else {
+        return @"Marked as done";
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0) {
+        return [self.toDo getArrayLength];
+    }
+    
     return [self.toDo getArrayLength];
 }
 
@@ -91,6 +103,18 @@
         [self.toDo deleteIteam:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         [self.tableView reloadData];
+    }
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+{
+    if( sourceIndexPath.section != proposedDestinationIndexPath.section )
+    {
+        return sourceIndexPath;
+    }
+    else
+    {
+        return proposedDestinationIndexPath;
     }
 }
 
