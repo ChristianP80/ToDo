@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -38,11 +39,18 @@
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Item" id="hVA-6g-SHT"/>
                     <navigationItem key="navigationItem" id="OQi-2z-e40">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="I3H-cn-I59">
-                            <connections>
-                                <segue destination="qHb-9d-8dy" kind="show" identifier="addTask" id="pWn-oU-FoL"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="I3H-cn-I59">
+                                <connections>
+                                    <segue destination="qHb-9d-8dy" kind="show" identifier="addTask" id="pWn-oU-FoL"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="edit" id="b9N-tA-90H">
+                                <connections>
+                                    <action selector="editBUtton:" destination="Bsg-AR-ulL" id="uoR-cj-etm"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>

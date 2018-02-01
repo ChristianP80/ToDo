@@ -34,6 +34,38 @@
     [super didReceiveMemoryWarning];
 }
 
+- (IBAction)editBUtton:(id)sender {
+    if ([self isEditing]) {
+        [self setEditing:NO animated:YES];
+    } else {
+        [self setEditing:YES animated:YES];
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+///////////////////////////////////////////////////////////
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    NSString *titleToMove = self.toDo.titelArray[sourceIndexPath.row];
+    [self.toDo.titelArray removeObjectAtIndex:sourceIndexPath.row];
+    [self.toDo.titelArray insertObject:titleToMove atIndex:destinationIndexPath.row];
+    
+    NSString *descriptionToMove = self.toDo.descriptionArray[sourceIndexPath.row];
+    [self.toDo.descriptionArray removeObjectAtIndex:sourceIndexPath.row];
+    [self.toDo.descriptionArray insertObject:descriptionToMove atIndex:destinationIndexPath.row];
+    
+    NSString *isImportantToMove = self.toDo.titelArray[sourceIndexPath.row];
+    [self.toDo.isImportantArray removeObjectAtIndex:sourceIndexPath.row];
+    [self.toDo.isImportantArray insertObject:isImportantToMove atIndex:destinationIndexPath.row];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:self.toDo.titelArray forKey:@"titleArray"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.toDo.descriptionArray forKey:@"descriptionArray"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.toDo.isImportantArray forKey:@"isImportantArray"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+///////////////////////////////////////////////////////////
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -82,3 +114,4 @@
 }
 
 @end
+
