@@ -49,7 +49,7 @@
     [self.descriptionArray removeObjectAtIndex:(int)index];
     [self.isImportantArray removeObjectAtIndex:(int)index];
     [[NSUserDefaults standardUserDefaults] setObject:self.titelArray forKey:@"titleArray"];
-    [[NSUserDefaults standardUserDefaults] setObject:self.titelArray forKey:@"descriptionArray"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.descriptionArray forKey:@"descriptionArray"];
     [[NSUserDefaults standardUserDefaults] setObject:self.isImportantArray forKey:@"isImportantArray"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
