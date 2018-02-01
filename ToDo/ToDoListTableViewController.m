@@ -26,6 +26,7 @@
 -(void)viewWillAppear:(BOOL)animated {
     self.toDo.titelArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"titleArray"]mutableCopy];
     self.toDo.descriptionArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"descriptionArray"]mutableCopy];
+    self.toDo.isImportantArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"isImportantArray"]mutableCopy];
     [self.tableView reloadData];
 }
 
@@ -72,8 +73,8 @@
         detail.title = cell.textLabel.text;
         int index = (int)[self.tableView indexPathForCell:cell].row;
         detail.showDetailsArray = self.toDo.descriptionArray;
+        detail.showImportantArray = self.toDo.isImportantArray;
         detail.detailIndex = index;
-        NSLog(@"string contains %@", self.toDo.descriptionArray);
     } else if ([segue.identifier isEqualToString:@"addTask"]) {
         AddToDoViewController *add = [segue destinationViewController];
         add.title = [NSString stringWithFormat:(@"Add your ToDo")];

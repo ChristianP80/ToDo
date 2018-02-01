@@ -25,9 +25,11 @@
 }
 
 - (IBAction)addItem:(id)sender {
-    [self.toDo addItem:self.toDoTitel.text: self.toDoDescription.text];
-//    [[NSUserDefaults standardUserDefaults] setObject:self.toDo.titelArray forKey:@"titleArray"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
+    if ([self.isImportantSwitch isOn]) {
+        [self.toDo addItem:self.toDoTitel.text: self.toDoDescription.text: @"yes"];
+    } else {
+        [self.toDo addItem:self.toDoTitel.text: self.toDoDescription.text: @"no"];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 

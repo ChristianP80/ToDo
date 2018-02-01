@@ -11,6 +11,7 @@
 
 @interface ShowDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *showToDoDetail;
+@property (weak, nonatomic) IBOutlet UISwitch *importantSwitch;
 
 @end
 
@@ -24,6 +25,11 @@
 
 -(void)displyText {
     self.showToDoDetail.text = self.showDetailsArray[self.detailIndex];
+    if ([self.showImportantArray[self.detailIndex] isEqualToString:@"yes"]) {
+        [self.importantSwitch setOn:YES];
+    } else {
+        [self.importantSwitch setOn:NO];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

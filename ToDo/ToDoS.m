@@ -25,22 +25,32 @@
             self.descriptionArray = [[NSMutableArray alloc] init];
         }
     }
+    if (self) {
+        self.isImportantArray = [[[NSUserDefaults standardUserDefaults]objectForKey:@"isImportantArray"]mutableCopy];
+        if(self.isImportantArray == nil) {
+            self.isImportantArray = [[NSMutableArray alloc] init];
+        }
+    }
     return self;
 }
 
--(void)addItem:(NSString*)titel :(NSString*)description{
+-(void)addItem:(NSString*)titel :(NSString*)description :(NSString*)isImportant{
     [self.titelArray addObject:titel];
     [self.descriptionArray addObject:description];
+    [self.isImportantArray addObject:isImportant];
     [[NSUserDefaults standardUserDefaults] setObject:self.titelArray forKey:@"titleArray"];
     [[NSUserDefaults standardUserDefaults] setObject:self.descriptionArray forKey:@"descriptionArray"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.isImportantArray forKey:@"isImportantArray"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 -(void)deleteIteam:(NSInteger)index{
     [self.titelArray removeObjectAtIndex:(int)index];
     [self.descriptionArray removeObjectAtIndex:(int)index];
+    [self.isImportantArray removeObjectAtIndex:(int)index];
     [[NSUserDefaults standardUserDefaults] setObject:self.titelArray forKey:@"titleArray"];
     [[NSUserDefaults standardUserDefaults] setObject:self.titelArray forKey:@"descriptionArray"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.isImportantArray forKey:@"isImportantArray"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
 }

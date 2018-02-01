@@ -10,5 +10,6 @@
 
 @interface ShowDetailsViewController : UIViewController
 @property (nonatomic) NSMutableArray *showDetailsArray;
+@property (nonatomic) NSMutableArray *showImportantArray;
 @property (nonatomic) int detailIndex;
 @end

@@ -11,8 +11,9 @@
 @interface ToDoS : NSObject
 @property (nonatomic) NSMutableArray *titelArray;
 @property (nonatomic) NSMutableArray *descriptionArray;
+@property (nonatomic) NSMutableArray *isImportantArray;
 
--(void)addItem:(NSString*)titel :(NSString*)description;
+-(void)addItem:(NSString*)titel :(NSString*)description :(NSString*)isImportant;
 -(void)deleteIteam:(NSInteger)index;
 -(NSInteger)getArrayLength;
 @end
