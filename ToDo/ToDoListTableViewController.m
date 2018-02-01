@@ -36,6 +36,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
     return 1;
 }
 
@@ -72,6 +73,7 @@
         int index = (int)[self.tableView indexPathForCell:cell].row;
         detail.showDetailsArray = self.toDo.descriptionArray;
         detail.detailIndex = index;
+        NSLog(@"string contains %@", self.toDo.descriptionArray);
     } else if ([segue.identifier isEqualToString:@"addTask"]) {
         AddToDoViewController *add = [segue destinationViewController];
         add.title = [NSString stringWithFormat:(@"Add your ToDo")];
