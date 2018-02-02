@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ToDoS.h"
 
 @interface AddToDoViewController : UIViewController
+
+@property (nonatomic) ToDoS *toDo;
 
 @end

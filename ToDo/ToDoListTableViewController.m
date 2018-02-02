@@ -24,9 +24,6 @@
 
 
 -(void)viewWillAppear:(BOOL)animated {
-    self.toDo.titelArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"titleArray"]mutableCopy];
-    self.toDo.descriptionArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"descriptionArray"]mutableCopy];
-    self.toDo.isImportantArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"isImportantArray"]mutableCopy];
     [self.tableView reloadData];
 }
 
@@ -45,7 +42,7 @@
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
-///////////////////////////////////////////////////////////
+
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
     NSString *titleToMove = self.toDo.titelArray[sourceIndexPath.row];
@@ -65,7 +62,7 @@
     [[NSUserDefaults standardUserDefaults] setObject:self.toDo.isImportantArray forKey:@"isImportantArray"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
-///////////////////////////////////////////////////////////
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -83,17 +80,25 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return [self.toDo getArrayLength];
+        return [self.toDo.titelArray count];
+    } else {
+        return [self.toDo.doneTitelArray count];
     }
-    
-    return [self.toDo getArrayLength];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"toDoCell" forIndexPath:indexPath];
-
-    cell.textLabel.text = self.toDo.titelArray[indexPath.row];
+    
+    
+    if (indexPath.section == 0) {
+        if ([self.toDo.isImportantArray[indexPath.row] isEqualToString:@"yes"]) {
+            [cell setBackgroundColor:[UIColor greenColor]];
+        }        
+        cell.textLabel.text = self.toDo.titelArray[indexPath.row];
+    } else {
+        cell.textLabel.text = self.toDo.doneTitelArray[indexPath.row];
+    }
 
     return cell;
 }
@@ -102,7 +107,9 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.toDo deleteIteam:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self.toDo addFromTempToDone];
         [self.tableView reloadData];
+
     }
 }
 
@@ -134,6 +141,7 @@
     } else if ([segue.identifier isEqualToString:@"addTask"]) {
         AddToDoViewController *add = [segue destinationViewController];
         add.title = [NSString stringWithFormat:(@"Add your ToDo")];
+        add.toDo = self.toDo;
     }
 }
 

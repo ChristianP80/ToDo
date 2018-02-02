@@ -12,8 +12,13 @@
 @property (nonatomic) NSMutableArray *titelArray;
 @property (nonatomic) NSMutableArray *descriptionArray;
 @property (nonatomic) NSMutableArray *isImportantArray;
+@property (nonatomic) NSMutableArray *doneTitelArray;
+@property (nonatomic) NSMutableArray *doneDescriptionArray;
+@property (nonatomic) NSMutableArray *doneIsImportantArray;
+@property (nonatomic) NSMutableArray *tempArray;
 
 -(void)addItem:(NSString*)titel :(NSString*)description :(NSString*)isImportant;
 -(void)deleteIteam:(NSInteger)index;
 -(NSInteger)getArrayLength;
+-(void)addFromTempToDone;
 @end

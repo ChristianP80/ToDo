@@ -31,6 +31,24 @@
             self.isImportantArray = [[NSMutableArray alloc] init];
         }
     }
+    if (self) {
+        self.doneTitelArray = [[[NSUserDefaults standardUserDefaults]objectForKey:@"titleArray"]mutableCopy];
+        if(self.doneTitelArray == nil) {
+            self.doneTitelArray = [[NSMutableArray alloc] init];
+        }
+    }
+    if (self) {
+        self.doneDescriptionArray = [[[NSUserDefaults standardUserDefaults]objectForKey:@"descriptionArray"]mutableCopy];
+        if(self.doneDescriptionArray == nil) {
+            self.doneDescriptionArray = [[NSMutableArray alloc] init];
+        }
+    }
+    if (self) {
+        self.doneIsImportantArray = [[[NSUserDefaults standardUserDefaults]objectForKey:@"isImportantArray"]mutableCopy];
+        if(self.doneIsImportantArray == nil) {
+            self.doneIsImportantArray = [[NSMutableArray alloc] init];
+        }
+    }
     return self;
 }
 
@@ -45,6 +63,13 @@
 }
 
 -(void)deleteIteam:(NSInteger)index{
+    NSString *titelObject = self.titelArray[index];
+    NSString *descriptionObject = self.descriptionArray[index];
+    NSString *importantObject = self.isImportantArray[index];
+    self.tempArray = @[].mutableCopy;
+    [self.tempArray addObject:titelObject];
+    [self.tempArray addObject:descriptionObject];
+    [self.tempArray addObject:importantObject];
     [self.titelArray removeObjectAtIndex:(int)index];
     [self.descriptionArray removeObjectAtIndex:(int)index];
     [self.isImportantArray removeObjectAtIndex:(int)index];
@@ -52,8 +77,17 @@
     [[NSUserDefaults standardUserDefaults] setObject:self.descriptionArray forKey:@"descriptionArray"];
     [[NSUserDefaults standardUserDefaults] setObject:self.isImportantArray forKey:@"isImportantArray"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
 }
+
+-(void)addFromTempToDone {
+    [self.doneTitelArray addObject:self.tempArray[0]];
+    [self.doneDescriptionArray addObject:self.tempArray[1]];
+    [self.doneIsImportantArray addObject:self.tempArray[2]];
+    [[NSUserDefaults standardUserDefaults] setObject:self.doneTitelArray forKey:@"doneTitleArray"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.doneDescriptionArray forKey:@"doneDescriptionArray"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.doneIsImportantArray forKey:@"doneIsImportantArray"];
+}
+
 
 -(NSInteger)getArrayLength {
     return self.titelArray.count;

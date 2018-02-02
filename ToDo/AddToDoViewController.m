@@ -14,14 +14,12 @@
 @property (weak, nonatomic) IBOutlet UITextField *toDoTitel;
 @property (weak, nonatomic) IBOutlet UITextView *toDoDescription;
 @property (weak, nonatomic) IBOutlet UISwitch *isImportantSwitch;
-@property (nonatomic) ToDoS *toDo;
 @end
 
 @implementation AddToDoViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.toDo = [[ToDoS alloc] init];
 }
 
 - (IBAction)addItem:(id)sender {
