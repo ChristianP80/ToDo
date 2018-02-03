@@ -20,6 +20,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:
+                                   self action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+}
+
+-(void)dismissKeyboard {
+    [self.toDoTitel resignFirstResponder];
+    [self.toDoDescription resignFirstResponder];
 }
 
 - (IBAction)addItem:(id)sender {

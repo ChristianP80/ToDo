@@ -43,21 +43,24 @@
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
-{
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     NSString *titleToMove = self.toDo.titelArray[sourceIndexPath.row];
+    NSString *descriptionToMove = self.toDo.descriptionArray[sourceIndexPath.row];
+    NSString *isImportantToMove = self.toDo.isImportantArray[sourceIndexPath.row];
+
+
     [self.toDo.titelArray removeObjectAtIndex:sourceIndexPath.row];
     [self.toDo.titelArray insertObject:titleToMove atIndex:destinationIndexPath.row];
     
-    NSString *descriptionToMove = self.toDo.descriptionArray[sourceIndexPath.row];
     [self.toDo.descriptionArray removeObjectAtIndex:sourceIndexPath.row];
     [self.toDo.descriptionArray insertObject:descriptionToMove atIndex:destinationIndexPath.row];
     
-    NSString *isImportantToMove = self.toDo.titelArray[sourceIndexPath.row];
     [self.toDo.isImportantArray removeObjectAtIndex:sourceIndexPath.row];
     [self.toDo.isImportantArray insertObject:isImportantToMove atIndex:destinationIndexPath.row];
-    
+
     [self.toDo saveData];
+    [self.tableView reloadData];
+
 }
 
 #pragma mark - Table view data source
@@ -110,22 +113,23 @@
             [self.tableView reloadData];
         } else {
             [self.toDo deletFromDone:indexPath.row];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             [self.tableView reloadData];
         }
     }
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
-{
-    if( sourceIndexPath.section != proposedDestinationIndexPath.section )
-    {
-        return sourceIndexPath;
-    }
-    else
-    {
-        return proposedDestinationIndexPath;
-    }
-}
+//- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+//{
+//    if( sourceIndexPath.section != proposedDestinationIndexPath.section )
+//    {
+//        return sourceIndexPath;
+//    }
+//    else
+//    {
+//        return proposedDestinationIndexPath;
+//    }
+//}
 
 #pragma mark - Navigation
 
