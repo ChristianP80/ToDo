@@ -57,10 +57,7 @@
     [self.toDo.isImportantArray removeObjectAtIndex:sourceIndexPath.row];
     [self.toDo.isImportantArray insertObject:isImportantToMove atIndex:destinationIndexPath.row];
     
-    [[NSUserDefaults standardUserDefaults] setObject:self.toDo.titelArray forKey:@"titleArray"];
-    [[NSUserDefaults standardUserDefaults] setObject:self.toDo.descriptionArray forKey:@"descriptionArray"];
-    [[NSUserDefaults standardUserDefaults] setObject:self.toDo.isImportantArray forKey:@"isImportantArray"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self.toDo saveData];
 }
 
 #pragma mark - Table view data source
@@ -90,26 +87,31 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"toDoCell" forIndexPath:indexPath];
     
-    
     if (indexPath.section == 0) {
         if ([self.toDo.isImportantArray[indexPath.row] isEqualToString:@"yes"]) {
-            [cell setBackgroundColor:[UIColor greenColor]];
-        }        
+            [cell setBackgroundColor:[UIColor orangeColor]];
+        }
         cell.textLabel.text = self.toDo.titelArray[indexPath.row];
     } else {
+        if ([self.toDo.doneIsImportantArray[indexPath.row] isEqualToString:@"yes"]) {
+            [cell setBackgroundColor:[UIColor orangeColor]];
+        }
         cell.textLabel.text = self.toDo.doneTitelArray[indexPath.row];
     }
-
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [self.toDo deleteIteam:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-        [self.toDo addFromTempToDone];
-        [self.tableView reloadData];
-
+        if (indexPath.section == 0) {
+            [self.toDo deleteIteam:indexPath.row];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [self.toDo addFromTempToDone];
+            [self.tableView reloadData];
+        } else {
+            [self.toDo deletFromDone:indexPath.row];
+            [self.tableView reloadData];
+        }
     }
 }
 

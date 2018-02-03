@@ -21,4 +21,7 @@
 -(void)deleteIteam:(NSInteger)index;
 -(NSInteger)getArrayLength;
 -(void)addFromTempToDone;
+-(void)saveData;
+-(void)deletFromDone:(NSInteger)index;
+
 @end
