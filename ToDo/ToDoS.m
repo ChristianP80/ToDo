@@ -7,6 +7,7 @@
 //
 
 #import "ToDoS.h"
+#import "ToDoListTableViewController.h"
 
 @implementation ToDoS
 
@@ -19,7 +20,6 @@
         self.doneTitelArray = [[[NSUserDefaults standardUserDefaults]objectForKey:@"doneTitleArray"]mutableCopy];
         self.doneDescriptionArray = [[[NSUserDefaults standardUserDefaults]objectForKey:@"doneDescriptionArray"]mutableCopy];
         self.doneIsImportantArray = [[[NSUserDefaults standardUserDefaults]objectForKey:@"doneIsImportantArray"]mutableCopy];
-        
         if(self.titelArray == nil) {
             self.titelArray = [[NSMutableArray alloc] init];
         }
@@ -64,17 +64,17 @@
     [self saveData];
 }
 
--(void)deletFromDone:(NSInteger)index {
-    [self.doneTitelArray removeObjectAtIndex:(int)index];
-    [self.doneDescriptionArray removeObjectAtIndex:(int)index];
-    [self.doneIsImportantArray removeObjectAtIndex:(int)index];
-    [self saveData];
-}
-
 -(void)addFromTempToDone {
     [self.doneTitelArray addObject:self.tempArray[0]];
     [self.doneDescriptionArray addObject:self.tempArray[1]];
     [self.doneIsImportantArray addObject:self.tempArray[2]];
+    [self saveData];
+}
+
+-(void)deletFromDone:(NSInteger)index {
+    [self.doneTitelArray removeObjectAtIndex:(int)index];
+    [self.doneDescriptionArray removeObjectAtIndex:(int)index];
+    [self.doneIsImportantArray removeObjectAtIndex:(int)index];
     [self saveData];
 }
 

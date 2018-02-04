@@ -25,6 +25,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [self.tableView reloadData];
+    [self loadView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,6 +35,7 @@
 - (IBAction)editBUtton:(id)sender {
     if ([self isEditing]) {
         [self setEditing:NO animated:YES];
+        [self.tableView reloadData];
     } else {
         [self setEditing:YES animated:YES];
     }
@@ -44,22 +46,38 @@
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    NSString *titleToMove = self.toDo.titelArray[sourceIndexPath.row];
-    NSString *descriptionToMove = self.toDo.descriptionArray[sourceIndexPath.row];
-    NSString *isImportantToMove = self.toDo.isImportantArray[sourceIndexPath.row];
 
-
-    [self.toDo.titelArray removeObjectAtIndex:sourceIndexPath.row];
-    [self.toDo.titelArray insertObject:titleToMove atIndex:destinationIndexPath.row];
+    if (sourceIndexPath.section == 0) {
+        NSString *titleToMove = self.toDo.titelArray[sourceIndexPath.row];
+        NSString *descriptionToMove = self.toDo.descriptionArray[sourceIndexPath.row];
+        NSString *isImportantToMove = self.toDo.isImportantArray[sourceIndexPath.row];
+        
+        [self.toDo.titelArray removeObjectAtIndex:sourceIndexPath.row];
+        [self.toDo.titelArray insertObject:titleToMove atIndex:destinationIndexPath.row];
     
-    [self.toDo.descriptionArray removeObjectAtIndex:sourceIndexPath.row];
-    [self.toDo.descriptionArray insertObject:descriptionToMove atIndex:destinationIndexPath.row];
+        [self.toDo.descriptionArray removeObjectAtIndex:sourceIndexPath.row];
+        [self.toDo.descriptionArray insertObject:descriptionToMove atIndex:destinationIndexPath.row];
     
-    [self.toDo.isImportantArray removeObjectAtIndex:sourceIndexPath.row];
-    [self.toDo.isImportantArray insertObject:isImportantToMove atIndex:destinationIndexPath.row];
+        [self.toDo.isImportantArray removeObjectAtIndex:sourceIndexPath.row];
+        [self.toDo.isImportantArray insertObject:isImportantToMove atIndex:destinationIndexPath.row];
 
-    [self.toDo saveData];
-    [self.tableView reloadData];
+        [self.toDo saveData];
+    } else {
+        NSString *titleToMove = self.toDo.doneTitelArray[sourceIndexPath.row];
+        NSString *descriptionToMove = self.toDo.doneDescriptionArray[sourceIndexPath.row];
+        NSString *isImportantToMove = self.toDo.doneIsImportantArray[sourceIndexPath.row];
+        
+        [self.toDo.doneTitelArray removeObjectAtIndex:sourceIndexPath.row];
+        [self.toDo.doneTitelArray insertObject:titleToMove atIndex:destinationIndexPath.row];
+        
+        [self.toDo.doneDescriptionArray removeObjectAtIndex:sourceIndexPath.row];
+        [self.toDo.doneDescriptionArray insertObject:descriptionToMove atIndex:destinationIndexPath.row];
+        
+        [self.toDo.doneIsImportantArray removeObjectAtIndex:sourceIndexPath.row];
+        [self.toDo.doneIsImportantArray insertObject:isImportantToMove atIndex:destinationIndexPath.row];
+        
+        [self.toDo saveData];
+    }
 
 }
 
@@ -115,21 +133,22 @@
             [self.toDo deletFromDone:indexPath.row];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
             [self.tableView reloadData];
+            
         }
     }
 }
 
-//- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
-//{
-//    if( sourceIndexPath.section != proposedDestinationIndexPath.section )
-//    {
-//        return sourceIndexPath;
-//    }
-//    else
-//    {
-//        return proposedDestinationIndexPath;
-//    }
-//}
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+{
+    if( sourceIndexPath.section != proposedDestinationIndexPath.section )
+    {
+        return sourceIndexPath;
+    }
+    else
+    {
+        return proposedDestinationIndexPath;
+    }
+}
 
 #pragma mark - Navigation
 
@@ -141,13 +160,21 @@
         ShowDetailsViewController *detail = [segue destinationViewController];
         detail.title = cell.textLabel.text;
         int index = (int)[self.tableView indexPathForCell:cell].row;
-        detail.showDetailsArray = self.toDo.descriptionArray;
-        detail.showImportantArray = self.toDo.isImportantArray;
-        detail.detailIndex = index;
+        if (self.tableView.indexPathForSelectedRow.section == 0) {
+            detail.showDetailsArray = self.toDo.descriptionArray;
+            detail.showImportantArray = self.toDo.isImportantArray;
+            detail.detailIndex = index;
+        } else {
+            detail.showDetailsArray = self.toDo.doneDescriptionArray;
+            detail.showImportantArray = self.toDo.doneIsImportantArray;
+            detail.detailIndex = index;
+        }
+            
     } else if ([segue.identifier isEqualToString:@"addTask"]) {
         AddToDoViewController *add = [segue destinationViewController];
         add.title = [NSString stringWithFormat:(@"Add your ToDo")];
         add.toDo = self.toDo;
+        [self.tableView reloadData];
     }
 }
 

@@ -37,6 +37,7 @@
     } else {
         [self.toDo addItem:self.toDoTitel.text: self.toDoDescription.text: @"no"];
     }
+    [self viewDidLoad];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
